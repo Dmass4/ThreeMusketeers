@@ -39,13 +39,13 @@ public class Player : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
         {
             takeDamage(20);
         }
     }
 
-    void takeDamage(int damage)
+    void takeDamage(int damage) //In progress method for damaging the player
     {
         currentHealth -= damage;
         healthbar.setHealth(currentHealth);
