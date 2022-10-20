@@ -11,13 +11,18 @@ public class Player : MonoBehaviour
 
     public HealthBar healthbar;
 
-   public float speed = 5;
-   private  Waypoints Wpoints;
-   private int waypointIndex;
+    public float speed;
+    private  Waypoints Wpoints;
+    private int waypointIndex;
+
+    private Rigidbody2D rb;
+    private Vector2 playerDirection;
 
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody2D>();
+
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
@@ -26,18 +31,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
-        if (Vector2.Distance(transform.position, Wpoints.waypoints[waypointIndex].position) < 0.1f)
-        {
-            if (waypointIndex < Wpoints.waypoints.Length - 1)
-            {
-                waypointIndex++;
-            }
-            else
-            {
-                Destroy(gameObject);
-            }
-        }
+
+        getPlayerDirection();
 
         if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
         {
@@ -45,9 +40,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        playerVelocity();
+    }
+
     void takeDamage(int damage) //In progress method for damaging the player
     {
         currentHealth -= damage;
         healthbar.setHealth(currentHealth);
+    }
+
+    void getPlayerDirection()
+    {
+        float directionX = Input.GetAxisRaw("Horizontal");
+        float directionY = Input.GetAxisRaw("Vertical");
+
+        playerDirection = new Vector2(directionX, directionY).normalized;
+    }
+
+    void playerVelocity()
+    {
+        rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
     }
 }
