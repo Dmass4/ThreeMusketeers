@@ -26,6 +26,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         transform.position = Vector2.MoveTowards(transform.position, Wpoints.waypoints[waypointIndex].position, speed * Time.deltaTime);
         if (Vector2.Distance(transform.position, Wpoints.waypoints[waypointIndex].position) < 0.1f)
         {
@@ -39,12 +40,13 @@ public class Enemy : MonoBehaviour
             }
         }
 
+        
         if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
         {
             takeDamage(20);
         }
+        */
 
-        
     }
 
     void takeDamage(int damage) //In progress method for damaging the player

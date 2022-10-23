@@ -18,6 +18,11 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 playerDirection;
 
+    public float KBForce;
+    public float KBCounter;
+    public float KBTotalTime;
+    public bool KnockFromRight;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,24 +36,42 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+            getPlayerDirection();
 
-        getPlayerDirection();
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
         {
             takeDamage(20);
         }
+        */
     }
 
-    private void FixedUpdate()
+    private void FixedUpdate() // Update is ran every physic based interaction
     {
         playerVelocity();
+
+        if (KBCounter > 0)
+        {
+            if (KnockFromRight == true)
+            {
+                rb.velocity = new Vector2(-KBForce, 0);
+            }
+            if (KnockFromRight == false)
+            {
+                rb.velocity = new Vector2(KBForce, 0);
+            }
+            KBCounter = 0;
+        }
     }
 
-    void takeDamage(int damage) //In progress method for damaging the player
+    public void takeDamage(int damage) //In progress method for damaging the player
     {
         currentHealth -= damage;
         healthbar.setHealth(currentHealth);
+        if (currentHealth <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     void getPlayerDirection()
