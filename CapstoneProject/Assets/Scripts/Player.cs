@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
         healthbar.setHealth(currentHealth);
         if (currentHealth <= 0)
         {
-            Destroy(gameObject);
+            Destroy(this.gameObject);
         }
     }
 
