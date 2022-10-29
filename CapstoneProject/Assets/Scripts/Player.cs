@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 
     public int maxHealth = 100;
     public int currentHealth;
+    // boolean when taking damage to prevent too much knockback/damage at once
+    private bool invincibility = false;
 
     public HealthBar healthbar;
 
@@ -18,9 +20,9 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Vector2 playerDirection;
 
-    public float KBForce;
-    public float KBCounter;
-    public float KBTotalTime;
+    // Knockback variables
+    public float KBForce = 15;
+    public bool knockbackTrigger = false;
     public bool KnockFromRight;
 
     // Start is called before the first frame update
@@ -46,32 +48,51 @@ public class Player : MonoBehaviour
         */
     }
 
-    private void FixedUpdate() // Update is ran every physic based interaction
+    // Update is ran every physic based interaction
+    private void FixedUpdate()
     {
         playerVelocity();
 
-        if (KBCounter > 0)
+        // invincibity to prevent too many knockbacks at once
+        if (invincibility == false)
         {
-            if (KnockFromRight == true)
+            if (knockbackTrigger == true)
             {
-                rb.velocity = new Vector2(-KBForce, 0);
+                if (KnockFromRight == true)
+                {
+                    rb.velocity = new Vector2(-KBForce, 0);
+                }
+                if (KnockFromRight == false)
+                {
+                    rb.velocity = new Vector2(KBForce, 0);
+                }
+                knockbackTrigger = false;
             }
-            if (KnockFromRight == false)
-            {
-                rb.velocity = new Vector2(KBForce, 0);
-            }
-            KBCounter = 0;
         }
     }
 
-    public void takeDamage(int damage) //In progress method for damaging the player
+    //In progress method for damaging the player
+    public void takeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthbar.setHealth(currentHealth);
-        if (currentHealth <= 0)
+        if (invincibility == false)
         {
-            Destroy(this.gameObject);
+            currentHealth -= damage;
+            healthbar.setHealth(currentHealth);
+            if (currentHealth <= 0)
+            {
+                Destroy(this.gameObject);
+            }
+            //Calls IEnumerator invincibilityFrames() below to call a wait command
+            StartCoroutine("invincibilityFrames");
         }
+    }
+
+    IEnumerator invincibilityFrames()
+    {
+        invincibility = true;
+        Debug.Log("Invincibility activated for 1.2 second(s)");
+        yield return new WaitForSeconds(1.2f);
+        invincibility = false;        
     }
 
     void getPlayerDirection()
