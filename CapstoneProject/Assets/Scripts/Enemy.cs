@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour
 {
-    public Player player;
     public Animator animator;
 
     private int maxHealth = 100;
@@ -63,28 +62,54 @@ public class Enemy : MonoBehaviour
     // For Trigger (passthrough?) type collisions with Player
     private void OnTriggerEnter2D(Collider2D collision) 
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && isAttacking == false)
         {
             // Set boolean back to true to disbale movement along waypoints
             isAttacking = true;
             // Determine left or right knockback
             if (collision.transform.position.x <= transform.position.x)
             {
-                player.KnockFromRight = true;
+                collision.GetComponent<Player>().KnockFromRight = true;
             }
             if (collision.transform.position.x > transform.position.x)
             {
-                player.KnockFromRight = false;
+                collision.GetComponent<Player>().KnockFromRight = false;
             }
-            player.knockbackTrigger = true;
+            collision.GetComponent<Player>().knockbackTrigger = true;
             // Calls the IEnumerator attackAnimation() below to call a wait command while performing animation
             StartCoroutine("attackAnimation");
-            player.takeDamage(damage);
+            //player.takeDamage(damage);
+            collision.GetComponent<Player>().takeDamage(damage);
             Debug.Log("Player Hit by Enemy!");
         }
     }
 
-    IEnumerator attackAnimation()
+    // onTriggerStay accounts for when player stays within the collision circle, hence to triggering another attack
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player" && isAttacking == false)
+        {
+            // Set boolean back to true to disbale movement along waypoints
+            isAttacking = true;
+            // Determine left or right knockback
+            if (collision.transform.position.x <= transform.position.x)
+            {
+                collision.GetComponent<Player>().KnockFromRight = true;
+            }
+            if (collision.transform.position.x > transform.position.x)
+            {
+                collision.GetComponent<Player>().KnockFromRight = false;
+            }
+            collision.GetComponent<Player>().knockbackTrigger = true;
+            // Calls the IEnumerator attackAnimation() below to call a wait command while performing animation
+            StartCoroutine("attackAnimation");
+            //player.takeDamage(damage);
+            collision.GetComponent<Player>().takeDamage(damage);
+            Debug.Log("Player Hit by Enemy!");
+        }
+    }
+
+        IEnumerator attackAnimation()
     {
         // Trigger spin animation
         animator.SetTrigger("SpinAttack");
