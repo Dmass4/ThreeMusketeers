@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
 
     private int maxHealth = 100;
     private int currentHealth;
-    private int damage = 7;
+    public int damage = 7;
     private bool isAttacking = false;
 
     public HealthBar healthbar;

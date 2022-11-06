@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Waypoints
   - Enemy
+  - Tower
+  - Castle
   layers:
   - Default
   - TransparentFX
