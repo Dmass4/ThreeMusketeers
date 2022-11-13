@@ -25,6 +25,9 @@ public class Player : MonoBehaviour
     public bool knockbackTrigger = false;
     public bool KnockFromRight;
 
+    public bool isFacingLeft;
+    private Vector2 facingLeft;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,13 +35,17 @@ public class Player : MonoBehaviour
 
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
+
+        facingLeft = new Vector2(-transform.localScale.x, transform.localScale.y);
+        isFacingLeft = false;
+
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
     }
 
     // Update is called once per frame
     void Update()
     {
-            getPlayerDirection();
+        getPlayerDirection();
 
         /*
         if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
@@ -52,6 +59,17 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         playerVelocity();
+
+        if(Input.GetAxisRaw("Horizontal") > 0 && isFacingLeft)
+        {
+            isFacingLeft = false;
+            flipFacing();
+        }
+        if(Input.GetAxisRaw("Horizontal") < 0 && !isFacingLeft)
+        {
+            isFacingLeft = true;
+            flipFacing();
+        }
 
         // invincibity to prevent too many knockbacks at once
         if (invincibility == false)
@@ -68,6 +86,19 @@ public class Player : MonoBehaviour
                 }
                 knockbackTrigger = false;
             }
+        }
+    }
+
+    void flipFacing()
+    {
+        if (isFacingLeft)
+        {
+            transform.localScale = facingLeft;
+        }
+
+        if (!isFacingLeft)
+        {
+            transform.localScale = new Vector2(-transform.localScale.x, transform.localScale.y);
         }
     }
 
