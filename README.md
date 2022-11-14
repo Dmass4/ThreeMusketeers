@@ -2,7 +2,7 @@
 
 Tower Defense!
 
-Created by: J. Morgan, D. Mass, and N. Trader
+Created by: J. Morgan, D. Massie, and N. Trader
 
 Tower defense game with player and resource gathering machanics. Collaborative project for Software Capstone class at University of Illinois Springfield.
 This project was created using Unity, GitHub, GitHub Desktop Editor, and Microsoft Visual Editor. Program written in Java and C. 
