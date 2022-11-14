@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
+    public GameObject tower;
 
     public int maxHealth = 100;
     public int currentHealth;
-
+    public int goldCount;
     // boolean when taking damage to prevent too much knockback/damage at once
     private bool invincibility = false;
 
@@ -26,7 +27,6 @@ public class Player : MonoBehaviour
     public bool knockbackTrigger = false;
     public bool KnockFromRight;
 
-    //Variables to check and change the characters facing when moving
     public bool isFacingLeft;
     private Vector2 facingLeft;
 
@@ -55,6 +55,14 @@ public class Player : MonoBehaviour
             takeDamage(20);
         }
         */
+
+        //Test to place towers
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            Vector2 mousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Instantiate(tower, mousePosition, Quaternion.identity);
+            Debug.Log("Tower Placed!");
+        }
     }
 
     // Update is ran every physic based interaction
@@ -62,7 +70,6 @@ public class Player : MonoBehaviour
     {
         playerVelocity();
 
-        //Player Changes facing when moving horizontally
         if(Input.GetAxisRaw("Horizontal") > 0 && isFacingLeft)
         {
             isFacingLeft = false;
@@ -77,6 +84,7 @@ public class Player : MonoBehaviour
         // invincibity to prevent too many knockbacks at once
         if (invincibility == false)
         {
+            // Determine knockback trigger and direction
             if (knockbackTrigger == true)
             {
                 if (KnockFromRight == true)
@@ -141,4 +149,16 @@ public class Player : MonoBehaviour
     {
         rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
     }
+
+    // Coin Collions
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Coin")
+        {
+            // 1 gold coin = 10 goldCount
+            Debug.Log("Gold coin collected! Adding 10");
+            goldCount += 10;
+        }
+    }
+
 }
