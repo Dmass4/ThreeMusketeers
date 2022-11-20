@@ -161,4 +161,9 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void addCoin(int amount)
+    {
+        goldCount += amount;
+    }
+
 }

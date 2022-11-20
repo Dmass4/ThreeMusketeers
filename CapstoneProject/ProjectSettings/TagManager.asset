@@ -46,6 +46,9 @@ TagManager:
   - name: Ground Layer
     uniqueID: 3529279469
     locked: 0
+  - name: Foliage Layer
+    uniqueID: 2970302295
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

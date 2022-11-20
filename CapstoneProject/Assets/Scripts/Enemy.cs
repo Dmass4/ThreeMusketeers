@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     public Animator animator;
+    public Player Player;
+    public Coin Coin;
 
     private int maxHealth = 100;
     private int currentHealth;
@@ -24,6 +26,7 @@ public class Enemy : MonoBehaviour
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -121,6 +124,16 @@ public class Enemy : MonoBehaviour
     void enemyDie()
     {
         Debug.Log("Enemy is dead!");
+        Debug.Log("Adding 10 gold to Player");
+        Player.addCoin(10);
+        Instantiate(Coin, transform.position, Quaternion.identity);
+        enemyDestroy();
+    }
+
+    void enemyDestroy()
+    {
+        Debug.Log("Destroying Enemy GameObject!");
         Destroy(this.gameObject);
     }
+
 }
