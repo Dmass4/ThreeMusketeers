@@ -51,7 +51,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 2845637453980454431}
   Player: {fileID: 0}
-  Coin: {fileID: 1319630411243713368, guid: f6638fb359db5a441b81641173dea13f, type: 3}
+  Gold: {fileID: 1319630411243713368, guid: f6638fb359db5a441b81641173dea13f, type: 3}
   damage: 7
   healthbar: {fileID: 2845637455485871928}
   speed: 2

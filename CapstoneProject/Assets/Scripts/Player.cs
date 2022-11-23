@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class Player : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     public int goldCount;
+    public TMP_Text goldCountDisplay;
+
+
     // boolean when taking damage to prevent too much knockback/damage at once
     private bool invincibility = false;
 
@@ -150,20 +154,33 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
     }
 
-    // Coin Collions
+    // Gold Collions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Coin")
+        if (collision.gameObject.tag == "Gold")
         {
-            // 1 gold coin = 10 goldCount
-            Debug.Log("Gold coin collected! Adding 10");
-            goldCount += 10;
+            addGold(10);
         }
     }
 
-    public void addCoin(int amount)
+    void addGold(int amount)
     {
+        // 1 gold coin = 10 goldCount
+        Debug.Log("Gold coin collected! Adding 10");
         goldCount += amount;
+        updateGoldCount();
+    }
+
+    public void subtractCoin(int amount)
+    {
+        goldCount -= amount;
+        updateGoldCount();
+    }
+
+    void updateGoldCount()
+    {
+        // Connects back to GoldCountPannel that displays a basic UI at the bottom of the game's camera
+        goldCountDisplay.text = goldCount.ToString();
     }
 
 }

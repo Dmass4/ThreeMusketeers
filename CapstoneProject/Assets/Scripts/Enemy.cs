@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
     public Player Player;
-    public Coin Coin;
+    public Gold Gold;
 
     private int maxHealth = 100;
     private int currentHealth;
@@ -124,9 +124,8 @@ public class Enemy : MonoBehaviour
     void enemyDie()
     {
         Debug.Log("Enemy is dead!");
-        Debug.Log("Adding 10 gold to Player");
-        Player.addCoin(10);
-        Instantiate(Coin, transform.position, Quaternion.identity);
+        // Generate Gold drop upon death
+        Instantiate(Gold, transform.position, Quaternion.identity);
         enemyDestroy();
     }
 
