@@ -8,7 +8,7 @@ TagManager:
   - Enemy
   - Tower
   - Castle
-  - Coin
+  - Gold
   layers:
   - Default
   - TransparentFX

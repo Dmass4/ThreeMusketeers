@@ -7,7 +7,7 @@ public class Enemy : MonoBehaviour
 {
     public Animator animator;
     public Player Player;
-    public Coin Coin;
+    public Gold Gold;
 
     private int maxHealth = 100;
     private int currentHealth;
@@ -50,7 +50,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    //Method for the enemy to take damage from the player
+    // Method for the enemy to take damage from the player
+    // Update Healthbar
     public void enemyTakeDamge(int damage)
     {
         currentHealth -= damage;
@@ -121,15 +122,15 @@ public class Enemy : MonoBehaviour
         isAttacking = false;
     }
 
+    // Method triggers enemy death conditions such as generating gold
     void enemyDie()
     {
-        Debug.Log("Enemy is dead!");
-        Debug.Log("Adding 10 gold to Player");
-        Player.addCoin(10);
-        Instantiate(Coin, transform.position, Quaternion.identity);
+        Debug.Log("Enemy is dead! Dropping Gold");
+        Instantiate(Gold, transform.position, Quaternion.identity);
         enemyDestroy();
     }
 
+    // Method to actually destroy the enemy gameObject, kept separate for useful troublshooting if issues arise from removing the gameObject
     void enemyDestroy()
     {
         Debug.Log("Destroying Enemy GameObject!");

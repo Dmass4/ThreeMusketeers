@@ -2,18 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
-    public GameObject tower;
-
+    public HealthBar healthbar;
     public int maxHealth = 100;
     public int currentHealth;
-    public int goldCount;
+
     // boolean when taking damage to prevent too much knockback/damage at once
     private bool invincibility = false;
-
-    public HealthBar healthbar;
+    
+    public int goldCount;
+    public TMP_Text goldCountDisplay;
+    public GameObject TowerButtonPannel;
 
     public float speed;
     private  Waypoints Wpoints;
@@ -33,6 +35,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TowerButtonPannel.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
 
         currentHealth = maxHealth;
@@ -48,21 +51,6 @@ public class Player : MonoBehaviour
     void Update()
     {
         getPlayerDirection();
-
-        /*
-        if (Input.GetKeyDown(KeyCode.Space)) //Test to see how damage works to player
-        {
-            takeDamage(20);
-        }
-        */
-
-        //Test to place towers
-        if (Input.GetKeyDown(KeyCode.Mouse1))
-        {
-            Vector2 mousePosition = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            Instantiate(tower, mousePosition, Quaternion.identity);
-            Debug.Log("Tower Placed!");
-        }
     }
 
     // Update is ran every physic based interaction
@@ -81,10 +69,10 @@ public class Player : MonoBehaviour
             flipFacing();
         }
 
-        // invincibity to prevent too many knockbacks at once
+        // Invincibity to prevent too much damage/knockbacks at once
         if (invincibility == false)
         {
-            // Determine knockback trigger and direction
+            // Determine knockback trigger and direction to apply knockback
             if (knockbackTrigger == true)
             {
                 if (KnockFromRight == true)
@@ -113,7 +101,8 @@ public class Player : MonoBehaviour
         }
     }
 
-    //In progress method for damaging the player
+    // Method for the player to take damage from the enemy
+    // Update Healthbar
     public void takeDamage(int damage)
     {
         if (invincibility == false)
@@ -150,20 +139,43 @@ public class Player : MonoBehaviour
         rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
     }
 
-    // Coin Collions
+    // Gold Collions
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Coin")
+        if (collision.gameObject.tag == "Gold")
         {
-            // 1 gold coin = 10 goldCount
-            Debug.Log("Gold coin collected! Adding 10");
-            goldCount += 10;
+            addGold(10);
         }
     }
 
-    public void addCoin(int amount)
+    void addGold(int amount)
     {
+        Debug.Log("Adding Gold");
         goldCount += amount;
+        updateGoldCount();
+    }
+
+    public void subtractGold(int amount)
+    {
+        goldCount -= amount;
+        updateGoldCount();
+    }
+
+    void updateGoldCount()
+    {
+        // Connects back to GoldCountPannel that displays a basic UI at the bottom of the game's camera
+        // Displays goldCount 
+        // Enables/disables visibility of TowerButtonPannel
+        goldCountDisplay.text = goldCount.ToString();
+        if (goldCount >= 20)
+        {
+            TowerButtonPannel.gameObject.SetActive(true);
+        }
+        
+        else
+        {
+            TowerButtonPannel.gameObject.SetActive(false);
+        }
     }
 
 }
