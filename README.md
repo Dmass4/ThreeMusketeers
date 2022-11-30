@@ -9,6 +9,10 @@ This project was created using Unity, GitHub, GitHub Desktop Editor, and Microso
 
 Tower defense is designed to run within Unity. The other programs listed above are for editing code. 
 
+INSTRUCTIONS:
+
+To play Tower Defence you must first start by selecting a scene. Nick
+
 
 TABLE OF CONTENTS:
 1. How to Run Tower Defense in Unity
