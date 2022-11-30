@@ -113,7 +113,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-        IEnumerator attackAnimation()
+    IEnumerator attackAnimation()
     {
         // Trigger spin animation
         animator.SetTrigger("SpinAttack");

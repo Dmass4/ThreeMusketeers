@@ -21,6 +21,8 @@ public class Player : MonoBehaviour
     private  Waypoints Wpoints;
     private int waypointIndex;
 
+    public Animator animator;
+
     private Rigidbody2D rb;
     private Vector2 playerDirection;
 
@@ -134,9 +136,11 @@ public class Player : MonoBehaviour
         playerDirection = new Vector2(directionX, directionY).normalized;
     }
 
+    //Sets players velocity to move and sets running animations
     void playerVelocity()
     {
         rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
+        animator.SetFloat("Speed", Mathf.Abs(Input.GetAxisRaw("Horizontal") * speed) + Mathf.Abs(Input.GetAxisRaw("Vertical") * speed));
     }
 
     // Gold Collions
@@ -177,5 +181,4 @@ public class Player : MonoBehaviour
             TowerButtonPannel.gameObject.SetActive(false);
         }
     }
-
 }
