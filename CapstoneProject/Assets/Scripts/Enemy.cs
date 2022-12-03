@@ -9,6 +9,8 @@ public class Enemy : MonoBehaviour
     public Player Player;
     public Gold Gold;
 
+    public EnemySpawner EnemySpawner;
+
     private int maxHealth = 100;
     private int currentHealth;
     public int damage = 7;
@@ -23,10 +25,12 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
         Wpoints = GameObject.FindGameObjectWithTag("Waypoints").GetComponent<Waypoints>();
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();        
     }
 
     // Update is called once per frame
@@ -133,6 +137,7 @@ public class Enemy : MonoBehaviour
     // Method to actually destroy the enemy gameObject, kept separate for useful troublshooting if issues arise from removing the gameObject
     void enemyDestroy()
     {
+        EnemySpawner.enemyWasKilled();
         Debug.Log("Destroying Enemy GameObject!");
         Destroy(this.gameObject);
     }

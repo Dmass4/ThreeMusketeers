@@ -7,7 +7,7 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public HealthBar healthbar;
-    public int maxHealth = 100;
+    private int maxHealth = 50;
     public int currentHealth;
 
     // boolean when taking damage to prevent too much knockback/damage at once
@@ -16,6 +16,9 @@ public class Player : MonoBehaviour
     public int goldCount;
     public TMP_Text goldCountDisplay;
     public GameObject TowerButtonPannel;
+
+    public GameObject GameOverMenu;
+    public TextMeshProUGUI GameInfoText;
 
     public float speed;
     private  Waypoints Wpoints;
@@ -37,6 +40,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameOverMenu.gameObject.SetActive(false);
         TowerButtonPannel.gameObject.SetActive(false);
         rb = GetComponent<Rigidbody2D>();
 
@@ -113,11 +117,21 @@ public class Player : MonoBehaviour
             healthbar.setHealth(currentHealth);
             if (currentHealth <= 0)
             {
+                endGame();
                 Destroy(this.gameObject);
             }
             //Calls IEnumerator invincibilityFrames() below to call a wait command
             StartCoroutine("invincibilityFrames");
         }
+    }
+
+    private void endGame()
+    {
+        // Show Game Over Pannel
+        Debug.Log("Player Destroyed. Switching from Game to Game Over Menu");
+        GameOverMenu.gameObject.SetActive(true);
+        GameInfoText.text = "Player was killed, try focusing on surviving more!";
+        Time.timeScale = 0f;
     }
 
     IEnumerator invincibilityFrames()
@@ -171,7 +185,7 @@ public class Player : MonoBehaviour
         // Displays goldCount 
         // Enables/disables visibility of TowerButtonPannel
         goldCountDisplay.text = goldCount.ToString();
-        if (goldCount >= 20)
+        if (goldCount >= 30)
         {
             TowerButtonPannel.gameObject.SetActive(true);
         }

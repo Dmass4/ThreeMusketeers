@@ -1,28 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Castle : MonoBehaviour
 {
-    public int maxHealth = 100;
+    private int maxHealth = 30;
     public int currentHealth;
 
     public HealthBar healthbar;
 
+    public GameObject GameOverMenu;
+    public TextMeshProUGUI GameInfoText;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameOverMenu.gameObject.SetActive(false);
         currentHealth = maxHealth;
         healthbar.setMaxHealth(maxHealth);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    //Method for the tower to take damage from the player
+    //Method for the tower to take damage from the enemy
     public void castleTakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -30,8 +30,9 @@ public class Castle : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("Castle Destroyed!");
+            endGame();
             Destroy(this.gameObject);
+            
         }
     }
 
@@ -46,4 +47,11 @@ public class Castle : MonoBehaviour
         }
     }
 
+    private void endGame()
+    {
+        Debug.Log("Castle Destroyed. Switching from Game to Game Over Menu");
+        GameOverMenu.gameObject.SetActive(true);
+        GameInfoText.text = "Castle was destroyed, try focusing on protecting it more!";
+        Time.timeScale = 0f;
+    }
 }

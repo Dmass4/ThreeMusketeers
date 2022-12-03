@@ -9,6 +9,9 @@ TagManager:
   - Tower
   - Castle
   - Gold
+  - EnemySpawner
+  - GameOverCanvas
+  - GameOverMenu
   layers:
   - Default
   - TransparentFX
@@ -18,7 +21,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Gold
   - Player
   - Enemies
   - 

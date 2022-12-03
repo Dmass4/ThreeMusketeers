@@ -32,7 +32,7 @@ public class TowerPlacement : MonoBehaviour
                 CurrentPlacingTower = null;
                 Cursor.visible = true;
                 customCursor.gameObject.SetActive(false);
-                player.GetComponent<Player>().subtractGold(20);
+                player.GetComponent<Player>().subtractGold(30);
 
                 Debug.Log("Tower Placed!");
             }
