@@ -12,7 +12,6 @@ public class TowerCombat : MonoBehaviour
     public Transform target;
 
     public GameObject bulletPrefab;
-    public Transform firePoint;
 
     // Start is called before the first frame update
     void Start()
@@ -69,7 +68,7 @@ public class TowerCombat : MonoBehaviour
 
     void shoot()
     {
-        GameObject bulletGO = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        GameObject bulletGO = Instantiate(bulletPrefab, transform.position, transform.rotation);
         Bullet bullet = bulletGO.GetComponent<Bullet>();
 
         if(bullet != null)
