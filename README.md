@@ -56,8 +56,7 @@ SPECIFIC REQUIREMENTS:
 	2.3.1 End users could be anyone that would like the game. Game is considered PG-13 due to the ideation of an action/shooting game. 
 
 2.4 General Contraints
-	2.4.1 Game must be ran on a computer. Game will not run over a network and must be installed. 
-	Unity download: https://unity3d.com/get-unity/download
+	2.4.1 Game must be ran on a computer. Game will not run over a network and must be installed. Refer to Download Instruction Manual. 
 
 2.5 Assumptions and Dependencies
 	2.5.1 Assumes user will have general knowledge of a computer and how to use a keyboard and mouse. Assumes the end user can read and understand the English Language
