@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
 
     void Update()
     {
+		// Requirement 1.1.0
         // Escape button will pause game, freezing time/movement
         if (Input.GetKey(KeyCode.Escape))
         {
@@ -22,6 +23,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+	// Requirement 1.1.1
     public void ResumeGame()
     {
         PauseMenuUI.gameObject.SetActive(false);
@@ -29,6 +31,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+	// Requirement 1.1.2
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
@@ -36,6 +39,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+	// Requirement 1.1.3
     public void QuitGame()
     {
         Application.Quit();

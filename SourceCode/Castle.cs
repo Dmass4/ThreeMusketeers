@@ -23,6 +23,7 @@ public class Castle : MonoBehaviour
     }
 
     //Method for the tower to take damage from the enemy
+	// Requirement 3.0.1
     public void castleTakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -47,6 +48,7 @@ public class Castle : MonoBehaviour
         }
     }
 
+	// Requirement 1.2.1
     private void endGame()
     {
         Debug.Log("Castle Destroyed. Switching from Game to Game Over Menu");

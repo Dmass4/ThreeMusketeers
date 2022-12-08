@@ -16,6 +16,8 @@ public class TowerPlacement : MonoBehaviour
     }
 
     // Update is called once per frame
+	// Once SetTowerToPlace() triggers, bool value will flip and trigger code below allowing user to create tower in world
+	//Requirement 6.0.3
     void Update()
     {
         // Detect if currentPlacingTower is assigned (not null)
@@ -39,6 +41,8 @@ public class TowerPlacement : MonoBehaviour
         }
     }
 
+	// Tower image appears as custom cursor, but is not yet instanitated/created in worldspace
+	//Requirement 6.0.4
     public void SetTowerToPlace(GameObject tower)
     {
         CurrentPlacingTower = tower;

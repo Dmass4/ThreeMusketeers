@@ -129,6 +129,7 @@ public class Player : MonoBehaviour
     {
         // Show Game Over Pannel
         Debug.Log("Player Destroyed. Switching from Game to Game Over Menu");
+		// Requirement 1.2.2
         GameOverMenu.gameObject.SetActive(true);
         GameInfoText.text = "Player was killed, try focusing on surviving more!";
         Time.timeScale = 0f;
@@ -151,6 +152,7 @@ public class Player : MonoBehaviour
     }
 
     //Sets players velocity to move and sets running animations
+	//Requirement 4.0.1
     void playerVelocity()
     {
         rb.velocity = new Vector2(playerDirection.x * speed, playerDirection.y * speed);
@@ -158,6 +160,7 @@ public class Player : MonoBehaviour
     }
 
     // Gold Collions
+	//Requirement 4.0.2
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Gold")

@@ -32,7 +32,8 @@ public class Enemy : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         EnemySpawner = GameObject.FindGameObjectWithTag("EnemySpawner").GetComponent<EnemySpawner>();        
     }
-
+	
+	// Requirement 5.0.1
     // Update is called once per frame
     void Update()
     {
@@ -67,6 +68,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+	// Requirement 5.0.2
     // For Trigger (passthrough?) type collisions with Player
     private void OnTriggerEnter2D(Collider2D collision) 
     {
@@ -117,6 +119,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+	// Requirement 5.0.3
     IEnumerator attackAnimation()
     {
         // Trigger spin animation

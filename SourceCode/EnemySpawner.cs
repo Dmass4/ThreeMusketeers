@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
        GameOverMenu.gameObject.SetActive(false);
     }
 
+	// Requirement 5.0.4
     IEnumerator spawnEnemies()
     {
        // Set a limit to the loop to limit how many enemies spawn
@@ -42,6 +43,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // Show Game Over Pannel
             Debug.Log("All Enemies Destroyed. Switching from Game to Game Over Menu");
+			// Requirement 1.2.3
             GameOverMenu.gameObject.SetActive(true);
             GameInfoText.text = "All enemies destroyed, good job defending!";
             Time.timeScale = 0f;

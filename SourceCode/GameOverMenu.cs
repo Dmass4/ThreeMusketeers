@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : MonoBehaviour
 {
 
+	// Requirement 1.2.4
     public void ReplayGame()
     {
         SceneManager.LoadScene("TowerDefenseGame");
@@ -11,6 +12,7 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+	// Requirement 1.2.5
     public void ReturnToMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
@@ -18,6 +20,7 @@ public class GameOverMenu : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+	// Requirement 1.2.6
     public void QuitGame()
     {
         Application.Quit();

@@ -35,7 +35,7 @@ public class Bullet : MonoBehaviour
 
     }
 
-
+	// Requirement 6.0.2
     private void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Collision");

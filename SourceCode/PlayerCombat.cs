@@ -21,6 +21,7 @@ public class PlayerCombat : MonoBehaviour
         }
     }
 
+	//Requirement 4.0.3
     void Attack()
     {
         //Need to add attack animation to this method
